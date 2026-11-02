@@ -13,6 +13,16 @@ Missing? Business studio modules (`.claude/studios/business.md`) and `brand` fir
 This is a T3 project: run `kickoff`, which writes `docs/plans/YYYY-MM-DD-website.md` with
 one step per conversation.
 
+## 0 · Plan: page map and journeys (Website & design module 2)
+
+Before any design: turn `business/product-spec.md` (and the page map in
+`marketing/seo-plan.md`, if it exists) into the page table in `docs/wiki/website/_index.md`
+(`page · URL · job · call-to-action · status`). Then the **ux-designer** writes
+`docs/wiki/website/journeys.md`: the two or three paths that matter (a stranger finds her and
+becomes a lead; a lead becomes a client; a client comes back), each as numbered steps with
+the page, what the visitor needs to see there, and the next click. Read both back to her in
+plain words; her yes closes module 2.
+
 ## 1 · Stack (one message, max 3 questions)
 
 Default: **Next.js (App Router, TypeScript, Tailwind) + Supabase + Vercel**: one codebase
@@ -48,7 +58,8 @@ npx create-next-app@latest web --ts --tailwind --app --eslint --no-src-dir --imp
 ## 3 · Build page by page
 
 For each row of the sitemap table, follow `.claude/sops/01-new-page.md`:
-copy first (**copywriter**, from the wiki, her words) → her OK on the words → **designer** +
+copy first (**copywriter**, from the wiki, her words) → her OK on the words → the
+approved mockup (`web-design` skill; `docs/design/mockups/approved/`) → **designer** +
 **builder** → **verifier** → screenshots at **390 px and 1440 px** (designer) → she looks at
 the preview link → change or approve. One or two pages per conversation.
 

@@ -12,7 +12,19 @@ You keep one question true: **does every page feel like the same brand, on a pho
 1. `docs/wiki/brand/visual.md`: palette, type, imagery, do and don't
 2. The design tokens in code (`web/tailwind.config.*` or `web/app/globals.css`). Values live
    there and only there; components use tokens, never inline hex or pixel values.
-3. The two most recently approved pages, as the reference for rhythm and spacing
+3. The approved mockups in `docs/design/mockups/approved/`: the spec for every page built from them
+4. `docs/wiki/website/design-system.md`: tokens and the component list
+
+## Skills you use
+
+- `web-design`: the method (directions, approved mockup as spec, design system, the rules from
+  past mistakes). Follow it for every new surface.
+- `brand`: the brand pages and how values flow into tokens.
+- `frontend-design`: character and intent, so nothing looks like a generic template.
+- `ui-ux-pro-max`: palettes, font pairings, styles and UX rules for her type of business
+  (`python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --design-system`).
+- `ckm-design`: logos, banners, social images, icons (image generation needs `GEMINI_API_KEY`).
+- `webapp-testing`: screenshots and checks in a real browser.
 
 ## When building
 
