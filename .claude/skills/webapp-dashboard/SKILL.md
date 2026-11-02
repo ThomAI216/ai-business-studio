@@ -1,91 +1,114 @@
 ---
 name: webapp-dashboard
-description: App & dashboard studio: the logged-in part: a client/member area, booking or forms that save data, and her own dashboard to manage clients, content and numbers. Load when the app section of `business/product-spec.md` is signed off, or she asks for logins, a members area, a client portal, a CRM, a dashboard, or "where do I see my sign-ups". Single schema or form changes later follow SOP 02 alone.
+description: App & dashboard studio modules 2 and 3. Set up her data safely and the logins - Supabase project, tables with row level security on every one, the isolation test (tools/db-verify.mjs), her owner gate, client sign-in and the client area's access rules. Load once app/plan.md is confirmed (module 1, app-plan), or when she asks for logins, "only I should see this", "clients log in", a members area, or a database. For a single table or form change later, SOP 02 alone is enough. Plan, dashboard and features are the app-plan, dashboard-design and app-recipes skills.
 ---
 
-# Web app and dashboard: her data, safely
+# Web app: her data, safely, and who may sign in
 
-Lives in the same `web/` Next.js app as the site, on Supabase (database + logins). T3:
-run `kickoff` → `docs/plans/YYYY-MM-DD-app.md`. Build order per step:
-**database** (tables + security) → **builder** (screens) → **verifier** → **reviewer** → she
-tries it on the preview link.
+The app lives in the same `web/` Next.js project as the website, on Supabase (database and
+logins). This skill is modules 2 and 3 of `.claude/studios/app-dashboard.md`. Module 1
+(`app-plan`) must be confirmed first: the approved data list in `docs/wiki/app/plan.md` is the
+brief. Module 4 is `dashboard-design`, module 5 is `app-recipes`.
 
-## 1 · Interview: what must it do? (max 3 questions per message)
+Build order for every step: **database** (tables and security) → **builder** (screens) →
+**verifier** → **qa-tester** → **reviewer** → she tries it on the preview link.
 
-Fill from the wiki first (`business/offer.md`, `business/funnel.md`), then ask:
-- Who logs in? (Only her? Her clients? A team member?) What may each one see and do?
-- What does she want to manage herself? (Clients, bookings, sign-ups, orders, content, notes.)
-- What numbers does she want to see each week? (New leads, standard offers taken, revenue…)
-- What should happen automatically, and what must always wait for her OK?
+## 1 · Supabase setup (step by step with her)
 
-Write the answers in `docs/wiki/app/_index.md`: roles, screens, numbers, automations.
+- She connects the **Supabase** connector (claude.ai → Settings → Connectors) and creates a
+  project in a region close to her clients. The free tier is enough to start.
+- Keys go into **Vercel's environment variables** (and the cloud environment if a session
+  needs them), never into a file or the chat. Names are in `.env.example`.
+- Record the project name and region in `docs/wiki/app/_index.md`. Agents act only on the
+  project the wiki names.
 
-## 2 · The data model, in plain words, approved by her
+## 2 · Data (module 2)
 
-Before any table exists, show her a short list like:
-> **Clients**: name, email, phone, where they came from, notes, date added.
-> **Bookings**: which client, date, which offer, status (requested / confirmed / done).
-> Only you can see clients and bookings. A client sees only their own bookings.
+Turn each "thing" of the approved data list into a table, per `.claude/sops/02-data-change.md`.
+The shape every table follows:
 
-Her yes → **database** turns it into tables via `.claude/sops/02-data-change.md`. Record the
-model (tables, who sees what) in `docs/wiki/app/_index.md`. Never collect data she does not
-need; never store health, financial or ID documents without a professional's advice on
-the law for her country.
+```sql
+create table if not exists public.clients (
+  id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  name text not null,
+  created_at timestamptz not null default now(),
+  unique (id, owner_id)                         -- lets child tables pin to the same owner
+);
+alter table public.clients enable row level security;
+revoke all on public.clients from anon;
+drop policy if exists clients_owner_rw on public.clients;
+create policy clients_owner_rw on public.clients for all to authenticated
+  using (owner_id = (select auth.uid())) with check (owner_id = (select auth.uid()));
+drop policy if exists clients_service on public.clients;
+create policy clients_service on public.clients for all to service_role using (true) with check (true);
+```
 
-## 3 · Supabase setup (step by step with her)
+- A child table points at its parent with a **composite foreign key**
+  `foreign key (client_id, owner_id) references public.clients(id, owner_id)`, so a row can
+  never be attached to another owner's row.
+- Rows a logged-in client may read get a separate policy `client_id = (select auth.uid())`
+  (select only, unless the plan says the client may change them).
+- `(select auth.uid())` rather than bare `auth.uid()`: evaluated once per query, not per row.
+- Migrations are files in `web/supabase/migrations/YYYYMMDDHHMMSS_name.sql`, written to be
+  re-runnable (`if not exists`, `drop policy if exists`).
 
-- She connects the **Supabase** connector (claude.ai → Settings → Connectors) and creates
-  a project (region close to her customers). Free tier to start.
-- Keys go into **Vercel's environment variables** (and the cloud environment if needed),
-  never into a file or the chat. Names are listed in `.env.example`.
-- Logins: Supabase Auth with email magic link or password; Google login only if she wants it.
+**The isolation test, before anything reaches the live database:**
+
+```bash
+cd web && npm i -D @electric-sql/pglite      # once
+node ../tools/db-verify.mjs                  # every migration, every time
+```
+
+It applies all migrations to an empty database with Supabase's auth stubs, then proves for
+every table: RLS on, no anonymous access, policies scoped to the signed-in user, deleting an
+account deletes its rows, a second user cannot read, change, delete or insert the first
+user's rows, references pinned to the same owner, storage folders private. A table that is
+deliberately server-only goes in its `SERVICE_ONLY` list with a reason. **A finding blocks the
+migration.** Then: dry-run on the live project, apply, run the advisors, regenerate types
+(never hand-edit them).
+
+Write the result in `docs/wiki/app/_index.md`: each table, what it holds, who reads and
+writes it, which personal data it contains.
+
+## 3 · Logins and the client area (module 3)
+
+- **Sign-in:** Supabase Auth with an email link (no password to forget) or email and
+  password; Google sign-in only if she wants it.
+- **Her owner gate fails closed.** Her dashboard routes check, on the server, that the
+  signed-in email is in the `OWNER_EMAILS` environment variable. Missing or empty variable:
+  nobody gets in, never everybody. Row level security enforces the same thing underneath.
+- **Clients** sign in to their own area only; every client screen reads through the
+  `client_id` policies. Test with **two test clients**: each must see only their own things.
+- Public pages (site, booking, contact form) stay outside the login; their server routes use
+  the service role only where unavoidable, always filtered by the owner, with a one-line
+  comment why.
+- Sign-out, "forgot my link" and an expired-link page exist from day one.
 
 ## 4 · Rules that are never relaxed
 
 These come from production systems where each one was paid for:
+- **Errors are values.** Every Supabase call destructures and checks `error`. Writes ask for
+  `.select('id')` and treat zero rows as failure (a write that matched nothing reports no error).
+- **Zod at every boundary:** every form handler, server action and route validates its input
+  and checks who is calling, there, not only in the page.
+- **Server actions return a typed result** (`{ ok: true, ... } | { ok: false, error }`) the
+  screen must handle; never fire and forget.
+- **`'use server'` files export async functions only;** helpers live beside them.
+- **The service-role key** is server-only, never in a client component, always filtered by owner.
+- **AI** goes through one module, `web/lib/ai.ts`, and only proposes (`app-recipes` §8).
+- **Emails and messages** to clients are switched on only after she has seen a sample.
+- **Collect only what a feature needs;** sensitive data (health, money, identity) only after
+  she checked the law for her country with a professional.
 
-- **Security in the database.** Row Level Security is ON for every table, with a policy
-  per role (e.g. `owner_id = auth.uid()`). A hidden button is not a lock.
-- **Owner gate fails closed.** Her dashboard is reachable only by emails in the
-  `OWNER_EMAILS` environment variable. Missing or empty variable → nobody gets in (never
-  everybody). Checked server-side in the dashboard layout AND enforced by RLS.
-- **The service-role key** (bypasses security) is used only in server code, only where
-  unavoidable, always filtered by owner, with a one-line comment saying why.
-- **Errors are values.** Every Supabase call destructures and checks `error`. Writes ask
-  for `.select('id')` and treat zero rows as failure (a write that matched nothing reports
-  no error).
-- **Validate every input with Zod**, in every form handler, server action and API route,
-  which also checks who is calling.
-- **Migrations are files** in `web/supabase/migrations/` with a timestamp name, applied
-  through the Supabase connector, and the TypeScript types regenerated after. Never edit
-  generated types by hand.
-- **`'use server'` files export async functions only**; helpers live beside them (a sync
-  export there fails the build late).
+## Done for modules 2 and 3
 
-## 5 · AI features
+`tools/db-verify.mjs` passes · migration applied and advisors clean · types regenerated ·
+she signed in as herself and as a test client on her phone · a second test client sees
+nothing of the first · verifier green, qa-tester and reviewer have no blockers ·
+`docs/wiki/app/_index.md` updated · App & dashboard modules 2 and 3 ☑ in `state.md`.
 
-- All AI calls go through **one module**, `web/lib/ai.ts` (one place for the model,
-  the key name, costs and logging). The key lives in environment variables.
-- **AI proposes, she decides.** AI output lands as a draft, a suggestion or a proposal on
-  her dashboard. Nothing is sent to a client, published, or changed in bulk without her
-  click. Nothing external (email, message, post) is sent without her confirmation.
-- Tell visitors when they are talking to or reading AI output.
+## Hand off
 
-## 6 · Emails and external services
-
-Transactional email (booking confirmations, "new sign-up" alerts to her) through one
-provider (e.g. Resend; `RESEND_API_KEY`). Every automatic email is shown to her as a
-sample before it is switched on. Payments: use the provider's hosted checkout (e.g.
-Stripe Checkout); never handle card data.
-
-## 7 · Her dashboard: start small
-
-First version: one overview (the weekly numbers she named), a list per table with search,
-a detail panel, and an inbox of things waiting for her decision. Add views only when she
-asks twice for the same information.
-
-## Done for each step
-
-Verifier green · reviewer has no blockers · RLS checked by **database** (try to read as the
-wrong user, expect nothing) · she used it on the preview link · `docs/wiki/app/_index.md`
-updated · published via `.claude/sops/03-publish.md` on her "publish".
+"Your data is private by construction and your clients can sign in. Next, the screen you'll
+open every morning." → `dashboard-design` (module 4).

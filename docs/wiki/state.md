@@ -32,7 +32,16 @@ Run the `onboarding` skill, then Business studio module 1 (`brainstorm`).
 - ☐ 5 Every article travels → `marketing/channels.md`
 - ☐ 6 Measure and keep it healthy → `marketing/seo-checks.md`
 
-**Website & design** ☐ brand ☐ site · **App & dashboard** ☐ · **Content** ☐
+**Website & design studio** (`.claude/studios/website-design.md`)
+- ☐ 1 Brand strategy and identity → `brand/voice.md`, `brand/visual.md`
+- ☐ 2 Site map and user journeys → `website/_index.md`, `website/journeys.md`
+- ☐ 3 Design directions and mockups → `docs/design/mockups/approved/`, `website/design-system.md`
+- ☐ 4 Design system in code → `website/design-system.md`
+- ☐ 5 Build the pages → `website/_index.md` (status per page)
+- ☐ 6 Quality check in a real browser → `website/qa.md`
+- ☐ 7 Publish → live links below
+
+**App & dashboard** ☐ · **Content** ☐
 
 ## Waiting on her
 - (nothing yet)

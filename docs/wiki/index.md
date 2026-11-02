@@ -33,6 +33,9 @@ Open one row, then stop. Rules: `CLAUDE.md` in this folder. Start of every sessi
 
 ## Website, app, content
 - [website](website/_index.md): sitemap, stack, deploy, page status
+- [journeys](website/journeys.md): the 2–3 paths visitors take, step by step
+- [design-system](website/design-system.md): approved mockups, tokens, the component list
+- [qa](website/qa.md): every real-browser check, what failed, what was fixed
 - [app](app/_index.md): web app and dashboard: users, data, logins
 - [content](content/_index.md): series, post types, image bank, calendar
 

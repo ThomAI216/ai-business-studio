@@ -12,12 +12,18 @@ notices missing data, which can take weeks.
    `list_tables` before writing anything.
 2. Write the migration in `web/supabase/migrations/YYYYMMDDHHMMSS_short_name.sql`,
    idempotent (`if not exists`, `or replace`). Additive by default; dropping or renaming needs her OK.
-3. **RLS on every new table** in the same migration. Default: a user reads and writes only
-   their own rows (`user_id = auth.uid()`). Anything wider is written down in `docs/wiki/app/_index.md`.
-4. **Dry-run** inside `begin; … rollback;`, then apply.
-5. `get_advisors` after applying. A new ERROR blocks.
-6. Regenerate `web/lib/types/database.ts`. Never hand-edit it.
-7. After adding a column, grep every `.select(` on that table. A column nobody selects is
+3. **RLS on every new table** in the same migration, and an `owner_id` on every row. Default:
+   a user reads and writes only their own rows (`owner_id = (select auth.uid())`); a client's
+   read access is a separate `client_id` policy. Child tables use a composite foreign key
+   `(parent_id, owner_id)`. Anything wider is written down in `docs/wiki/app/_index.md`.
+   Shape: `webapp-dashboard` skill §2.
+4. **The isolation test:** `cd web && node ../tools/db-verify.mjs` (install once:
+   `npm i -D @electric-sql/pglite`). It must pass before anything reaches the live database;
+   a finding blocks the migration.
+5. **Dry-run** inside `begin; … rollback;`, then apply.
+6. `get_advisors` after applying. A new ERROR blocks.
+7. Regenerate `web/lib/types/database.ts`. Never hand-edit it.
+8. After adding a column, grep every `.select(` on that table. A column nobody selects is
    `undefined` at runtime and green under type-check.
 
 ## Reading
@@ -50,6 +56,7 @@ without her confirmation.
 
 - [ ] Live catalogue checked before writing the migration
 - [ ] RLS on every new table; policies match the wiki
+- [ ] `node tools/db-verify.mjs` passed (output pasted in the report)
 - [ ] Dry-run passed; migration applied (or clearly stated as not applied, and what breaks until it is)
 - [ ] Advisors: no new ERROR
 - [ ] Types regenerated
