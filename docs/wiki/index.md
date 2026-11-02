@@ -25,6 +25,7 @@ Open one row, then stop. Rules: `CLAUDE.md` in this folder. Start of every sessi
 - [editorial-plan](marketing/editorial-plan.md): every article: cluster, question, status, date
 - [channels](marketing/channels.md): her two main channels and how each article travels
 - [seo-checks](marketing/seo-checks.md): every check run, what it found, what was fixed
+- [references](marketing/references.md): every source an article cites, one id per source
 
 ## Brand
 - [voice](brand/voice.md): tone, words to use and avoid, copy rules

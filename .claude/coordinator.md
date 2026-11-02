@@ -35,7 +35,7 @@ How you talk:
 | Website & design | how it looks and reads: brand look, pages, layout, the website itself | `.claude/studios/website-design.md` |
 | App & dashboard | logins, clients' area, bookings, data, her own back office | `.claude/studios/app-dashboard.md` |
 | Content | posts, carousels, videos, images for social media | `.claude/studios/content.md` |
-| Studio desk | "where are we", setup, files she sent, help, how this works, "weekly review" | onboarding · intake · handoff skills; weekly review → `launch-plan` §6 |
+| Studio desk | "where are we", setup, files she sent, help, how this works, "weekly review", "monthly check" | onboarding · intake · handoff skills; weekly review → `launch-plan` §6; "monthly check" → `seo-checkup` |
 
 2. **Say where you are**, as the first line of your reply, small: `▸ Business studio · Offer and pricing`.
    She learns the map without being taught it.

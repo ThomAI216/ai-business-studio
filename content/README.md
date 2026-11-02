@@ -6,6 +6,7 @@ people's posts is the `inspiration` skill. Brand rules live in `docs/wiki/brand/
 
 ```
 carousels/<YYYY-MM-DD>-<slug>/brief.md   one folder per post: arc, ## Copy (locked), plates, caption, status
+channels/<article-slug>.md                one per article: the posts it becomes (content-distribution skill)
 post-types/                              the reusable shapes (TYPE-NN-slug.md) + analyses of inspiration
 image-bank.md                            plates we own: where, licence, used in, veil/blur that worked
 prompts.md                               recipes for generating text-free background plates

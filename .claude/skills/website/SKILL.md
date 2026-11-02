@@ -73,27 +73,16 @@ Keep `docs/wiki/website/_index.md` current: a table `page · URL · job · statu
 
 ## 5 · Articles (journal, guides, blog)
 
-Articles follow one standard so they read well and get quoted by search and AI engines:
-
-- **Shape:** title (what the article answers) → one-line summary → 3–5 key takeaways that
-  answer the title with no page around them → sections → sources.
-- **Every section answers a real question** a reader would type ("How long until I see
-  results?", not "Results"), and opens with a **one- or two-sentence answer that makes
-  sense quoted alone**. If you cannot write that answer, the heading is wrong.
-- Visible subheadings can be statements for a narrative read; the questions and answers
-  then appear as a folded "Quick answers" block at the end and in the FAQ schema.
-- **A closed set of blocks**, nothing styled ad hoc: key takeaways, section answer, "try
-  this" steps, a caution/safety note, a definition, a comparison table, a figure with alt
-  text and caption, plain paragraphs (one paragraph per block). Colours carry meaning and
-  never overlap (e.g. one colour only for cautions).
-- Claims carry sources; no source → soften the claim. Calm register, no hype.
-- If the article asks readers questions (quiz, checklist): show questions, but never let
-  the software score or interpret answers on health, money or legal matters; offer the
-  standard offer ("talk it through on a free call") instead. Check with a professional.
-- If AI drafted it: a person (her) reviewed it before publishing; say so in one small line.
-- Checklist before an article ships: questions end in "?", every answer stands alone,
-  takeaways answer the title, figures have alt + caption, sources present, no em dashes,
-  she approved it.
+How articles are written, reviewed and published is the `article-writing` skill (Marketing &
+SEO studio). One standard, one place. What the **site** must give every article:
+- One articles folder and one route pattern, decided once and recorded in
+  `docs/wiki/website/_index.md` (the writing skills look it up there).
+- Its own `<head>`: title, description, canonical, real published and updated dates.
+- `Article` structured data with the real author, and `FAQPage` built from the article's
+  question headings and their standalone answers (only questions actually on the page).
+- An author box with real credentials only, the sources list, and the free next step.
+- Listed in `sitemap.xml`; drafts and stubs `noindex` and out of the sitemap.
+- The closed set of article blocks as components, nothing styled ad hoc.
 
 ## 6 · Legal pages
 
