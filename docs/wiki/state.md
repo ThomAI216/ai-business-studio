@@ -24,7 +24,15 @@ Run the `onboarding` skill, then Business studio module 1 (`brainstorm`).
 - ☐ 7 The first 90 days → `business/plan.md`, `business/goals.md`
 - ☐ 8 What the website and app must do → `business/product-spec.md`
 
-**Marketing & SEO** ☐ · **Website & design** ☐ brand ☐ site · **App & dashboard** ☐ · **Content** ☐
+**Marketing & SEO studio** (`.claude/studios/marketing-seo.md`)
+- ☐ 1 The SEO and AI-search plan → `marketing/seo-plan.md`, `marketing/keywords.md`
+- ☐ 2 Foundations on the site (needs a preview) → `marketing/seo-checks.md`
+- ☐ 3 Articles that answer → `marketing/editorial-plan.md`
+- ☐ 4 Found by AI answers (needs the live site) → `marketing/seo-checks.md`
+- ☐ 5 Every article travels → `marketing/channels.md`
+- ☐ 6 Measure and keep it healthy → `marketing/seo-checks.md`
+
+**Website & design** ☐ brand ☐ site · **App & dashboard** ☐ · **Content** ☐
 
 ## Waiting on her
 - (nothing yet)

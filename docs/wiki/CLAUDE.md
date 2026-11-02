@@ -8,6 +8,7 @@
 |---|---|
 | Where the project is right now | `state.md` (always current, short) |
 | Who she is, what she sells, to whom | `business/` |
+| How she is found: SEO, AI search, channels | `marketing/` |
 | How the brand looks and sounds | `brand/` |
 | How the website works (pages, stack, deploy) | `website/` |
 | How the web app / dashboard works (data, logins) | `app/` |

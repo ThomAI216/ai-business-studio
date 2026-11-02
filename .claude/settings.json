@@ -6,15 +6,46 @@
   },
   "permissions": {
     "allow": [
-      "Bash(ls:*)", "Bash(cat:*)", "Bash(head:*)", "Bash(tail:*)", "Bash(wc:*)", "Bash(find:*)",
-      "Bash(grep:*)", "Bash(rg:*)", "Bash(sort:*)", "Bash(diff:*)", "Bash(jq:*)", "Bash(echo:*)",
-      "Bash(mkdir:*)", "Bash(cp:*)", "Bash(mv:*)", "Bash(file:*)",
-      "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git add:*)",
-      "Bash(git commit:*)", "Bash(git push:*)", "Bash(git fetch:*)", "Bash(git pull:*)",
-      "Bash(git branch:*)", "Bash(git checkout:*)", "Bash(git switch:*)", "Bash(git show:*)",
-      "Bash(node:*)", "Bash(npm:*)", "Bash(npx:*)", "Bash(python3:*)",
-      "Bash(ffmpeg:*)", "Bash(ffprobe:*)", "Bash(yt-dlp:*)",
-      "Bash(bash tools/*)", "Bash(mkdir -p .claude/approvals:*)", "Bash(touch .claude/approvals/*)"
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(sort:*)",
+      "Bash(diff:*)",
+      "Bash(jq:*)",
+      "Bash(echo:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(file:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git show:*)",
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(python3:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(ffprobe:*)",
+      "Bash(yt-dlp:*)",
+      "Bash(bash tools/*)",
+      "Bash(mkdir -p .claude/approvals:*)",
+      "Bash(touch .claude/approvals/*)",
+      "Bash(\".claude/skills/seo/scripts/claude-seo\":*)",
+      "Bash(.claude/skills/seo/scripts/claude-seo:*)"
     ],
     "deny": [
       "Read(./.env)",
@@ -26,22 +57,60 @@
   },
   "hooks": {
     "SessionStart": [
-      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.mjs\"", "timeout": 120 }] }
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.mjs\"",
+            "timeout": 120
+          }
+        ]
+      }
     ],
     "UserPromptSubmit": [
-      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/context-meter.mjs\"", "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/context-meter.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "PreToolUse": [
       {
         "matcher": "Bash|Write|Edit|NotebookEdit|Read|mcp__github__merge_pull_request|mcp__.*merge.*",
-        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard.mjs\"", "timeout": 10 }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard.mjs\"",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "PostToolUse": [
-      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/context-meter.mjs\"", "timeout": 10 }] }
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/context-meter.mjs\"",
+            "timeout": 10
+          }
+        ]
+      }
     ],
     "Stop": [
-      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/stop-save.mjs\"", "timeout": 30 }] }
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/stop-save.mjs\"",
+            "timeout": 30
+          }
+        ]
+      }
     ]
   }
 }

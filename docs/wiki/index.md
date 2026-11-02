@@ -19,6 +19,13 @@ Open one row, then stop. Rules: `CLAUDE.md` in this folder. Start of every sessi
 - [goals](business/goals.md): north-star number and leading indicators
 - [product-spec](business/product-spec.md): what the website and app must do (hand-off to building)
 
+## Marketing & SEO (Marketing & SEO studio, modules 1–6)
+- [seo-plan](marketing/seo-plan.md): topic clusters, page map, local and language decisions, rhythm
+- [keywords](marketing/keywords.md): the questions her clients ask, in their words, by cluster
+- [editorial-plan](marketing/editorial-plan.md): every article: cluster, question, status, date
+- [channels](marketing/channels.md): her two main channels and how each article travels
+- [seo-checks](marketing/seo-checks.md): every check run, what it found, what was fixed
+
 ## Brand
 - [voice](brand/voice.md): tone, words to use and avoid, copy rules
 - [visual](brand/visual.md): palette, type, imagery, logo, do and don't

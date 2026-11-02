@@ -40,7 +40,7 @@ The full guide for the owner is [`START-HERE.md`](START-HERE.md).
 | Coordinator manual (≤40 lines) | `CLAUDE.md` | every session |
 | Persona (Nova) and per-message triage | `.claude/coordinator.md` | every session |
 | Five studio briefs | `.claude/studios/` | one brief, per message |
-| Specialists (13 agents) | `.claude/agents/` | when delegated |
+| Specialists (13 studio agents + 19 `seo-*` toolkit agents) | `.claude/agents/` | when delegated |
 | Routing and delegation contract | `.claude/orchestration.md` | when delegating |
 | Procedures for changes | `.claude/sops/` | one file, on demand |
 | Workflows | `.claude/skills/` | one skill, on demand |
@@ -68,6 +68,9 @@ transcripts when local Whisper is unavailable. Vercel and Supabase connectors
 - `.claude/skills/brainstorm` is adapted from the brainstorming skill in
   [obra/superpowers](https://github.com/obra/superpowers) (MIT, © 2025 Jesse Vincent); its
   licence is in that folder.
+- The SEO toolkit (`.claude/skills/seo*`, `.claude/agents/seo-*.md`) is
+  [claude-seo](https://github.com/AgriciDaniel/claude-seo) v2.5.0 by AgriciDaniel (MIT), vendored
+  with `tools/vendor-claude-seo.sh`; see `.claude/skills/seo/VENDORED.md`.
 - The stress test follows Gary Klein's premortem method.
 - `motion/` uses [Remotion](https://www.remotion.dev), which has its own licence: free for
   individuals and small companies, a paid company licence above that. Check
