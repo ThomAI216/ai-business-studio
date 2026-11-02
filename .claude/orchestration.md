@@ -18,21 +18,26 @@ brief to write, and a result to re-read. Worth it for a 40-file sweep; never for
 | The work is | Agent | Model | Pairs with |
 |---|---|---|---|
 | Wide read-only search: "where is X", "what uses Y" | `scout` | haiku | — |
-| Market, competitors, prices, customer signals, SEO questions | `researcher` | sonnet | Business studio modules 2 · 3 · 4, `website` |
-| Business model, offer, pricing, positioning, plans | `strategist` | opus | Business studio modules 3 · 4 · 5 · 7 |
-| Premortem deep-dives, assumption attacks | `critic` | opus | Business studio module 6 (`stress-test`) |
-| Site, article, social or email copy | `copywriter` | sonnet | skills `brand`, `carousel` |
-| Look and feel, tokens, mobile, "is this on-brand?" | `designer` | sonnet | skill `brand`, SOP 01 |
-| Pages, components, forms, server actions | `builder` | sonnet | skills `website`, `webapp-dashboard`, SOPs 01 · 02 |
-| Tables, RLS, migrations, missing data | `database` | sonnet | skill `webapp-dashboard`, SOP 02 |
-| Images, PDFs, videos, audio, post links | `media-analyst` | sonnet | skills `intake`, `media-reading`, `inspiration` |
-| Slides and short videos (Remotion) | `content-producer` | sonnet | skill `carousel` |
+| Market, competitors, prices, customer signals, SEO questions | `researcher` | sonnet | Business 2 · 3 · 4, Marketing & SEO 1 |
+| Business model, offer, pricing, positioning, plans, vision options | `strategist` | opus | Business 3 · 4 · 5 · 7, `vision`, `board-meeting` |
+| Premortem deep-dives, assumption attacks, claims checks | `critic` | opus | Business 6 (`stress-test`), `board-meeting`, `article-writing` |
+| Site, article, social or email copy | `copywriter` | sonnet | `brand`, `article-writing`, `carousel` |
+| Site maps, journeys, wireframes, forms, usability | `ux-designer` | sonnet | Website & design 2, `app-plan` |
+| Look and feel, mockups, tokens, mobile, "is this on-brand?" | `designer` | sonnet | `brand`, `web-design`, SOP 01 |
+| Pages, components, forms, server actions | `builder` | sonnet | `website`, `webapp-dashboard`, `app-recipes`, SOPs 01 · 02 |
+| Tables, RLS, migrations (her own project only) | `database` | sonnet | `webapp-dashboard`, SOP 02, `tools/db-verify.mjs` |
+| Her numbers: dashboard metrics, review and board figures | `data-analyst` | sonnet | `dashboard-design`, `board-meeting`, Content 5 |
+| Images, PDFs, videos, audio, post links | `media-analyst` | sonnet | `intake`, `media-reading`, `inspiration` |
+| Slides and short videos (Remotion) | `content-producer` | sonnet | `carousel` |
+| Clicking through the site like a visitor, at 390 and 1440 | `qa-tester` | sonnet | Website & design 6, App & dashboard 6 |
 | Type-check, lint, build, tests | `verifier` | haiku | SOPs 03 · 04 |
 | Review a branch before publishing | `reviewer` | opus | SOP 03 |
 | Keep `docs/wiki/` true | `wiki-keeper` | sonnet | every skill's last step |
+| SEO audits and measurements (`seo-technical`, `seo-geo`, `seo-schema`, ... 19 agents) | `seo-*` | per agent | spawned by the toolkit through `seo-checkup` |
 
-Model tier is a cost decision. `scout` and `verifier` are mechanical: haiku. The two opus agents
-guard what is expensive to get wrong: the business she builds on, and what goes public.
+Model tier is a cost decision. `scout` and `verifier` are mechanical: haiku. The opus agents
+guard what is expensive to get wrong: the business she builds on (`strategist`, `critic`) and
+what goes public (`reviewer`).
 
 ## When *not* to delegate
 

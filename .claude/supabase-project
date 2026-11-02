@@ -1,0 +1,3 @@
+# The ONLY database (Supabase project ref) this studio may ever touch: HER OWN project,
+# created for this business. Empty in the template, so every database call is refused.
+# Written once by the webapp-dashboard skill, after she said yes. Never another project.

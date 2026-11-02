@@ -29,5 +29,6 @@ skill now, then tell her to open a new conversation and say "continue". Hand off
 - `main` is the working branch (conversations start from it); `live` is the published site.
   End every step: commit named paths, push, fold into `main` (`handoff` §Save). `main` → `live` only after her "publish" (SOP 03).
 - Never `git add -A` or `git add .`; never read or print `.env*` or a secret.
+- One database only: HER OWN Supabase project, named in `.claude/supabase-project` (the guard enforces it). Never any other.
 - The wiki is the memory: `docs/wiki/index.md` routes to one page. Her answers become `confirmed` only when she says so.
 - A mistake that cost time becomes a page in `docs/wiki/lessons/` the same day.

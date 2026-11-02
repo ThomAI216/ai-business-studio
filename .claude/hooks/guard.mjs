@@ -49,6 +49,36 @@ const PUBLISH_MSG =
 // Merging a pull request through the GitHub tools is publishing too.
 if (/merge_pull_request|merge_branch/.test(tool) && !fresh("publish")) block(PUBLISH_MSG);
 
+// ---------- Database guard: only HER own Supabase project, never any other ----------
+// The template must never reach a database that is not the one she created for this
+// project (the person who set this up has their own databases on the same platform).
+// The allowed project is the single ref in .claude/supabase-project, empty in the template,
+// so every database call is refused until her own project exists and is recorded.
+// search_docs reads Supabase's public documentation: no project, no data.
+if (/^mcp__.*supabase.*__/i.test(tool) && !/search_docs$/.test(tool)) {
+  let allowed = "";
+  try {
+    allowed = readFileSync(join(ROOT, ".claude", "supabase-project"), "utf8")
+      .split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("#"))[0] || "";
+  } catch {}
+  const name = tool.replace(/^mcp__[^_]+(?:_[^_]+)*?__/, "");
+  // Account-wide calls: only to set up HER new project, with her explicit yes.
+  const ACCOUNT = /(list_projects|list_organizations|get_organization|create_project|get_cost|confirm_cost|pause_project|restore_project)$/;
+  if (ACCOUNT.test(tool)) {
+    if (!fresh("supabase-setup")) {
+      block("this database call works on the whole Supabase account. It is allowed only to create HER OWN new project, after she said yes in this conversation: then create `.claude/approvals/supabase-setup` (valid 60 min). Never choose, open or reuse an existing project she did not create for this business.");
+    }
+  } else {
+    const pid = String(ti.project_id ?? ti.projectId ?? ti.project_ref ?? "");
+    if (!allowed) {
+      block("no database is connected to this project yet. Only her own new Supabase project may ever be used: create it with her (webapp-dashboard skill), then record its ref in `.claude/supabase-project`.");
+    }
+    if (pid !== allowed) {
+      block(`this database call targets project "${pid || "(none)"}", but the only project this studio may touch is the one in .claude/supabase-project. Never connect to any other database.`);
+    }
+  }
+}
+
 // The Read tool on a secret file.
 if (tool === "Read") {
   const fp = String(ti.file_path ?? "");
@@ -85,6 +115,9 @@ if (tool === "Bash") {
   }
 
   const writeVerb = /(^|[\s;&|])(tee|cp|mv|rm|truncate|dd)\b|>{1,2}\s*[^&\s]|\bsed\b[^\n;&|]*\s-i\b/.test(cmd);
+  if (writeVerb && /\.claude[\\/]supabase-project/.test(cmd) && !fresh("supabase-setup")) {
+    block("`.claude/supabase-project` decides which database this studio may touch. Change it only to record HER OWN new project, after her explicit yes (`.claude/approvals/supabase-setup`).");
+  }
   if (writeVerb && /(^|[^\w-])\.claude[\\/]hooks[\\/]/.test(cmd) && !fresh("hook-edit")) {
     block("this changes .claude/hooks/, code that runs automatically on every step. Ask the owner (or her guide), then create `.claude/approvals/hook-edit` and retry.");
   }
@@ -94,6 +127,9 @@ if (tool === "Write" || tool === "Edit" || tool === "NotebookEdit") {
   const fp = String(ti.file_path ?? ti.notebook_path ?? "");
   if (/(^|[\\/])\.claude[\\/]hooks[\\/]/.test(fp) && !fresh("hook-edit")) {
     block("editing .claude/hooks/ changes code that runs automatically on every step. Ask first, then create `.claude/approvals/hook-edit` and retry.");
+  }
+  if (/(^|[\\/])\.claude[\\/]supabase-project$/.test(fp) && !fresh("supabase-setup")) {
+    block("`.claude/supabase-project` decides which database this studio may touch. Change it only to record HER OWN new project, after her explicit yes: create `.claude/approvals/supabase-setup` first.");
   }
   if (/(^|[\\/])\.env(\.(?!example)[\w-]+)?$/.test(fp)) {
     block("never write secrets into a file in the repo. Secrets go in Vercel / Supabase / the cloud environment's variables.");

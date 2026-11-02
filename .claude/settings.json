@@ -80,7 +80,7 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Bash|Write|Edit|NotebookEdit|Read|mcp__github__merge_pull_request|mcp__.*merge.*",
+        "matcher": "Bash|Write|Edit|NotebookEdit|Read|mcp__github__merge_pull_request|mcp__.*merge.*|mcp__.*[Ss]upabase.*",
         "hooks": [
           {
             "type": "command",
