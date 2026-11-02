@@ -18,6 +18,7 @@ knows her clients better than any framework does.
 | # | Module | Skill | Produces (wiki) | Done when |
 |---|---|---|---|---|
 | 1 | Her idea, sharpened | `brainstorm` | `business/idea.md` | she reads the idea brief and says "yes, that's it" |
+| 1b | Where it is going | `vision` (co-founder desk) | `business/vision.md` | mission, three-year picture, ambition level, values, bets, "never": she confirms |
 | 2 | Who it is for | `customer-research` | `business/audience.md` | one primary customer, their problem in their own words, 3–5 real conversations planned or done |
 | 3 | How the business works | `business-model` | `business/model.md`, `business/competitors.md` | the one-page model has no blank box she has not decided to leave blank |
 | 4 | What she sells, at what price | `offer-and-pricing` | `business/offer.md`, `business/funnel.md` | a priced offer ladder and one free entry offer |
@@ -30,6 +31,8 @@ knows her clients better than any framework does.
 sent her pricing, or a deck), audit it against the module's "done when", fill only the gaps,
 and move on. If she wants to jump ahead, follow the Coordinator's "out of order" rule.
 Track progress as a checklist in `docs/wiki/state.md` (one line per module: ☐ / ◐ / ☑).
+The vision (1b) is offered right after module 1 and revisited after module 7; once the plan
+exists, the monthly `board-meeting` keeps the whole studio honest against it.
 
 ## Rules every module follows
 

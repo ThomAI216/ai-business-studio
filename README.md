@@ -1,6 +1,7 @@
 # AI Business Studio
 
-A studio you run by talking to one AI coordinator, **Nova**. Nova starts with the business
+A studio you run by talking to one AI co-founder, **Nova**: a strategic partner and chairman
+who also runs a team of specialist agents for you. Nova starts with the business
 idea you already have and works through it with you: who it is for, what you sell and at
 what price, what could go wrong, your first 90 days. Then Nova designs and builds your website,
 and your app and dashboard if you need them, and helps with marketing, SEO and social content.

@@ -1,7 +1,8 @@
 # Start here
 
-This folder is your studio. You talk to one assistant, **Nova**, your coordinator: a
-business partner and project lead in one. Nova starts where you are, with your idea, and
+This folder is your studio. You talk to one assistant, **Nova**: your strategic co-founder,
+who also runs the studio for you. Nova wants to understand your whole business, brings ideas,
+asks the hard questions, and once a month steps back with you for a "board meeting". Nova starts where you are, with your idea, and
 works through it with you until it is a business you can explain, sell and build. Then
 Nova builds your website and, if you need it, your app and dashboard. Behind the scenes
 Nova brings in specialists (research, strategy, writing, design, building) and checks
