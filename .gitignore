@@ -1,0 +1,23 @@
+# secrets — never committed
+.env
+.env.*
+!.env.example
+# session-local approvals and machine state
+.claude/approvals/
+.claude/settings.local.json
+# build output and dependencies
+node_modules/
+.next/
+dist/
+out/
+motion/out/
+.vercel/
+# scratch from media reading (the digest .md is kept, raw frames are not)
+inbox/**/frames/
+*.tmp
+.DS_Store
+
+# designer screenshots (shared with her as files, not committed)
+web/.screens/
+# video digest frames inside raw/ (digest.md and contact sheet are kept)
+docs/wiki/raw/**/frames/

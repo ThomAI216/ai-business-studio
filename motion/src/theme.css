@@ -1,0 +1,4 @@
+/* Remotion renders into a plain div; kill the UA defaults once, here.
+   Brand values do NOT live in CSS: they live in src/brand/tokens.ts. */
+* { box-sizing: border-box; }
+p, h1, h2, h3, ol, ul { margin: 0; padding: 0; }

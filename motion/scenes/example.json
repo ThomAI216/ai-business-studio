@@ -1,0 +1,46 @@
+{
+  "id": "example",
+  "series": "example",
+  "slides": [
+    {
+      "type": "cover",
+      "props": {
+        "tint": "bright",
+        "ground": "night",
+        "plate": { "family": "bloom", "at": "top-left", "strength": 0.6 },
+        "eyebrow": "Example series · 02",
+        "title": "A whole post\n**written as data**",
+        "body": "Every word on these slides lives in scenes/example.json"
+      }
+    },
+    {
+      "type": "argument",
+      "props": {
+        "tint": "cool",
+        "ground": "light",
+        "plate": { "family": "dunes", "at": "bottom-right", "strength": 0.45 },
+        "eyebrow": "How it works",
+        "title": "Change the words\n**the design follows**",
+        "body": "The coordinator edits this file, the slides render from it",
+        "points": [
+          { "label": "01", "text": "Copy is locked first" },
+          { "label": "02", "text": "Then the plate and the tint" },
+          { "label": "03", "text": "Then the motion" }
+        ],
+        "closing": "One file per post, nothing to redraw"
+      }
+    },
+    {
+      "type": "closer",
+      "props": {
+        "tint": "accent",
+        "ground": "dark",
+        "plate": { "family": "shaft", "at": "top-left", "strength": 0.55 },
+        "eyebrow": "Try it",
+        "title": "Your next post\n**starts as a sentence**",
+        "body": "Tell the coordinator the topic and who it is for",
+        "action": "It drafts the copy before any design"
+      }
+    }
+  ]
+}
