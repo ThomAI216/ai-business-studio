@@ -6,6 +6,7 @@ Open one row, then stop. Rules: `CLAUDE.md` in this folder. Start of every sessi
 - [state](state.md): where the project is, what is next, what is waiting on her
 
 ## Business (Business studio, modules 1–8)
+- [vision](business/vision.md): mission, three-year picture, ambition level, values, bets, never
 - [owner](business/owner.md): who she is, how she likes to work, her coordinator's name
 - [idea](business/idea.md): her idea, sharpened: who, what, why her, success, anti-goals
 - [audience](business/audience.md): the primary customer, their problem in their words
@@ -36,10 +37,14 @@ Open one row, then stop. Rules: `CLAUDE.md` in this folder. Start of every sessi
 - [journeys](website/journeys.md): the 2–3 paths visitors take, step by step
 - [design-system](website/design-system.md): approved mockups, tokens, the component list
 - [qa](website/qa.md): every real-browser check, what failed, what was fixed
-- [app](app/_index.md): web app and dashboard: users, data, logins
+## App & dashboard
+- [app](app/_index.md): her own Supabase project (name, region, ref), tables, logins, features
+- [plan](app/plan.md): who logs in, what they do, the screens, the data and who sees what
+- [dashboard](app/dashboard.md): her daily screen, the numbers and lists she watches
 - [content](content/_index.md): series, post types, image bank, calendar
 
 ## Memory
 - [decisions](decisions/_index.md): one line per decision, newest first
 - [lessons](lessons/_index.md): traps we fell into (and inherited ones)
+- [board](board/_index.md): monthly board-meeting minutes, one page per month
 - [log](log.md): what changed, when

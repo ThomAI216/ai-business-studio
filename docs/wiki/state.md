@@ -14,6 +14,10 @@ Run the `onboarding` skill, then Business studio module 1 (`brainstorm`).
 
 ## The map  (☐ not started · ◐ in progress · ☑ confirmed by her)
 
+**Co-founder desk** (`.claude/coordinator.md`)
+- ☐ Vision → `business/vision.md` (offered right after Business module 1)
+- ☐ First board meeting → `board/YYYY-MM.md` · next board meeting: (set at the first one)
+
 **Business studio** (`.claude/studios/business.md`)
 - ☐ 1 Her idea, sharpened → `business/idea.md`
 - ☐ 2 Who it is for → `business/audience.md`
@@ -41,7 +45,16 @@ Run the `onboarding` skill, then Business studio module 1 (`brainstorm`).
 - ☐ 6 Quality check in a real browser → `website/qa.md`
 - ☐ 7 Publish → live links below
 
-**App & dashboard** ☐ · **Content** ☐
+**App & dashboard studio** (`.claude/studios/app-dashboard.md`; "not needed yet" is a valid answer)
+- ☐ 1 The app plan in plain words → `app/plan.md`
+- ☐ 2 Her data, safe (her own Supabase project only) → `app/_index.md`
+- ☐ 3 Logins and the client area → `app/_index.md`
+- ☐ 4 Her dashboard → `app/dashboard.md`
+- ☐ 5 Features from the recipes → `app/_index.md`
+- ☐ 6 Quality check and publish → `website/qa.md`
+
+**Content studio** (`.claude/studios/content.md`)
+- ☐ 1 Pillars ☐ 2 Post types ☐ 3 First post ☐ 4 From each article ☐ 5 Learn what works → `content/_index.md`
 
 ## Waiting on her
 - (nothing yet)

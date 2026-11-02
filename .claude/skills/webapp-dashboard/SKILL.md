@@ -19,8 +19,12 @@ Build order for every step: **database** (tables and security) → **builder** (
   project in a region close to her clients. The free tier is enough to start.
 - Keys go into **Vercel's environment variables** (and the cloud environment if a session
   needs them), never into a file or the chat. Names are in `.env.example`.
-- Record the project name and region in `docs/wiki/app/_index.md`. Agents act only on the
-  project the wiki names.
+- **One database, hers, for ever.** The studio may only ever touch the project created here,
+  for this business, under her own Supabase account. Never pick, open or reuse an existing
+  project from a list, even if one appears. After her yes: create `.claude/approvals/supabase-setup`,
+  create the project, then write its ref as the single line in `.claude/supabase-project`
+  (the guard hook refuses every database call to any other project, and every call at all
+  while that file is empty). Record name, region and ref in `docs/wiki/app/_index.md`.
 
 ## 2 · Data (module 2)
 
